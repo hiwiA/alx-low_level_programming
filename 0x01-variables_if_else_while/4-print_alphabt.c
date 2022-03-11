@@ -1,5 +1,7 @@
 #include <stdio.h>
-
+/*
+ *Print all the letters except q and e
+ */
 int main(void)
 {
 	char alp = 'a';
