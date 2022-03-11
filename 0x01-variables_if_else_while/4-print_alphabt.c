@@ -1,12 +1,17 @@
 #include <stdio.h>
-/*
- *Print all the letters except q and e
+/**
+ *  * main - Prints alphabet
+ *   * @void: Empty parameter list for main.
+ *    *
+ *     * Description: Prints the alphabet in lower case
+ *      * Skip q and e
+ *       * Can only use putchar
+ *        *
+ *         * Return: 0 for success
  */
 int main(void)
 {
-/*
- *main function to display alphabet
- */	char alp = 'a';
+	char alp = 'a';
 
 	for (  ;  alp <= 'z' ; alp++)
 		if (alp != 'q' && alp != 'e')
