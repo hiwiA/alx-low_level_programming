@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-
 /**
  * main - Positive or Negative - print sign of random number
  * @void: Empty parameter list for main.
@@ -17,6 +16,7 @@ int main(void)
 	 
 
 	int n;
+		
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
 
