@@ -4,7 +4,9 @@
  */
 int main(void)
 {
-	char alp = 'a';
+/*
+ *main function to display alphabet
+ */	char alp = 'a';
 
 	for (  ;  alp <= 'z' ; alp++)
 		if (alp != 'q' && alp != 'e')
