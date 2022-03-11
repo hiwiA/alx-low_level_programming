@@ -11,7 +11,7 @@
  * is zero.
  *
  * Return: 0 for success
- /
+ */
 int main(void)
 {
 	 
