@@ -5,7 +5,7 @@ int main(void)
 	int n;
 	int a[5];
 
-	a[2] = 1024;
+	a[2] = 98;
 	/*
 	* write your line of code here...
 	* Remember:
