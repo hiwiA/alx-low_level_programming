@@ -1,10 +1,14 @@
 #include "main.h"
 /**
  * main- check the
- * Return: Always 0.
  */
-int main(void)
+void _puts_recursion(char *s)
 {
-	_puts_recursion("c recursio");
-	return (0);
+	if (*s)
+	{
+		_putchar(*s);
+		_puts_recursion(++s);
+	}
+	else
+		_putchar('\n');
 }
