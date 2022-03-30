@@ -1,11 +1,10 @@
 #include "main.h"
 /**
- * main - check the code for Holberton School students.
- *
+ * main- check the
  * Return: Always 0.
  */
 int main(void)
 {
-	_puts_recursion("Betty Holberton");
+	_puts_recursion("c recursio");
 	return (0);
 }
