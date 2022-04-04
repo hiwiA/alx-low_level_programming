@@ -40,7 +40,7 @@ char **strtow(char *str)
 	words = word_counter(str);
 	if (words < 1)
 		return (NULL);
-	strDup = malloc(word * sizeof(char *) );
+	strDup = malloc(sizeof(char *) *(word) );
 	if (strDup == NULL)
 		return (NULL);
 	i = 0;
