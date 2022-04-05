@@ -50,7 +50,7 @@ int word_count(char *s, int word)
 	}
 	else if (s[0] != ' ' && s[0] != '\0' && word == 0)
 	{
-		return (word_count(++s, 1));
+		return (word_count(++s, 1) + 1);
 	}
 
 	return (0);
@@ -71,7 +71,7 @@ char **strtow(char *str)
 
 	if (str == NULL || num_words == 0)
 		return (NULL);
-	list = malloc((num_words + 1) * sizeof(char *));
+	list = malloc((num_words) * sizeof(char *));
 	if (list == NULL)
 		return (NULL);
 
