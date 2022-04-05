@@ -2,84 +2,97 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * helper - helps function
- * @word: wordcount
- * @len: length
- * @str: string to go through
- * @s: array you are assigning
- * Return: char value
- */
-char **helper(int word, int len, char *str, char **s)
+ * findword - find position of next word
+ * @s: string
+ * Return: position of next word
+ **/
+int findword(char *s)
 {
-	int i, k, j;
+	int i;
 
-	j = 0;
-	for (i = 0; i < word; i++)
-	{
-		k = 0;
-		for (; j < len; j++)
-		{
-			if (str[0] != ' ' || str[j] != ' ')
-			{
-				s[i][k] = str[j];
-				k++;
-			}
-			if (j != 0 && str[j] == ' ' && str[j - 1] != ' ')
-			{
-				j++;
-				break;
-			}
-		}
-		s[i][k + 1] = '\0';
-	}
-	s[word + 1] = NULL;
-	return (s);
+	for (i = 0; s[i] == ' '; i++)
+		;
+
+	return (i);
 }
 /**
- * strtow - string to words
- * @str: string to check
- * Return: return char value
- */
+ * wordlen - find length of word
+ * @s: string
+ * Return: length of word
+ **/
+int wordlen(char *s)
+{
+
+	int i;
+
+	for (i = 0; s[i] != '\0' && s[i] != ' '; i++)
+		;
+	return (i);
+}
+/**
+ * word_count - find number of words in string
+ * @s: string
+ * @word: switch used to track if currently in word
+ * Return: number of words in string
+ **/
+int word_count(char *s, int word)
+{
+
+	if (s == NULL || s[0] == '\0')
+		return (0);
+
+	if (s[0] == ' ')
+		return (word_count(++s, 0));
+
+	else if (s[0] != ' ' && s[0] != '\0' && word == 1)
+	{
+		return (word_count(++s, 1));
+	}
+	else if (s[0] != ' ' && s[0] != '\0' && word == 0)
+	{
+		return (word_count(++s, 1) + 1);
+	}
+
+	return (0);
+}
+/**
+ * strtow - create an array of words from string
+ * @str: string
+ * Description: create array of words from string, last element should be null
+ * Return: pointer to strings, NULL if fails
+ **/
 char **strtow(char *str)
 {
-	int len, i, j, size, k, word;
-	char **s;
+	char **list;
+	int num_words, i, k, j;
 
-	if (str == NULL)
-		return (NULL);
-	len = 0;
-	word = 0;
-	while (str[len] != '\0')
-	{
-		if (str[0] != ' ')
-		word++;
-		if (str[len] != ' ' && str[len - 1] == ' ' && len != 0)
-			word++;
-		len++;
-	}
-	s = (char **)malloc(sizeof(char *) * word + 1);
-	if (s == NULL)
-		return (NULL);
 	j = 0;
-	for (i = 0; i < word; i++)
+	num_words = word_count(str, 0);
+
+	if (str == NULL || num_words == 0)
+		return (NULL);
+	list = malloc((num_words + 1) * sizeof(char *));
+	if (list == NULL)
+		return (NULL);
+
+	for (i = 0; i < num_words; i++)
 	{
-		size = 0;
-		for (; j < len; j++)
+		j += findword(&str[j]);
+		list[i] = (char *)malloc((wordlen(str) + 1) * sizeof(char));
+		if (list[i] == NULL)
 		{
-			if (str[0] != ' ' || str[j] != ' ')
-				size++;
-			if (str[j] == ' ' && size > 0)
-				break;
+			for (i = i - 1; i >= 0; i--)
+				free(list[i]);
+			free(list);
+			return (NULL);
 		}
-		printf("%d\n", size);
-		s[i] = (char *)malloc(sizeof(char) * size + 1);
-		if (s[i] == NULL)
+		for (k = 0; str[j] != ' ' && str[j] != '\0'; k++)
 		{
-			for (k = i - 1; k >= 0; k--)
-				free(s[k]);
-			free(s);
+			list[i][k] = str[j];
+			j++;
 		}
+		list[i][k] = '\0';
 	}
-	s = helper(word, len, str, s);
-	return (s);
+	list[i] = NULL;
+	return (list);
 }
