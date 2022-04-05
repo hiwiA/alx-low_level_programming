@@ -50,7 +50,7 @@ int word_count(char *s, int word)
 	}
 	else if (s[0] != ' ' && s[0] != '\0' && word == 0)
 	{
-		return (word_count(++s, 1) + 1);
+		return (word_count(++s, 1));
 	}
 
 	return (0);
@@ -78,7 +78,7 @@ char **strtow(char *str)
 	for (i = 0; i < num_words; i++)
 	{
 		j += findword(&str[j]);
-		list[i] = (char *)malloc((wordlen(str) ) * sizeof(char));
+		list[i] = (char *)malloc((wordlen(str) + 1) * sizeof(char));
 		if (list[i] == NULL)
 		{
 			for (i = i - 1; i >= 0; i--)
