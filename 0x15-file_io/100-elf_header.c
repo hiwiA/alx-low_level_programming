@@ -174,61 +174,61 @@ void print_osabi(unsigned char *e_ident)
 }
 
 /**
- *  * print_type - print ELF's type
- *   * @e_type: e_type address
- *    * @e_ident: pointer to char array
- *     */
+ * print_type - print ELF's type
+ * @e_type: e_type address
+ * @e_ident: pointer to char array
+ */
 void print_type(unsigned int e_type, unsigned char *e_ident)
 {
-		if (e_ident[EI_DATA] == ELFDATA2MSB)
-					e_type = e_type >> 8;
+	if (e_ident[EI_DATA] == ELFDATA2MSB)
+		e_type = e_type >> 8;
 
-			printf("  Type:                              ");
-				switch (e_type)
-						{
-									case ET_NONE:
-													printf("NONE (Unknown type)\n");
-																break;
-																		case ET_REL:
-																			printf("REL (Relocatable file)\n");
-																						break;
-																								case ET_EXEC:
-																									printf("EXEC (Executable file)\n");
-																												break;
-																														case ET_DYN:
-																															printf("DYN (Shared object file)\n");
-																																		break;
-																																				case ET_CORE:
-																																					printf("CORE (Core file)\n");
-																																								break;
-																																										default:
-																																											printf("<unknown: %x>\n", e_type);
-																																												}
+	printf("  Type:                              ");
+	switch (e_type)
+	{
+		case ET_NONE:
+			printf("NONE (Unknown type)\n");
+			break;
+		case ET_REL:
+			printf("REL (Relocatable file)\n");
+			break;
+		case ET_EXEC:
+			printf("EXEC (Executable file)\n");
+			break;
+		case ET_DYN:
+			printf("DYN (Shared object file)\n");
+			break;
+		case ET_CORE:
+			printf("CORE (Core file)\n");
+			break;
+		default:
+			printf("<unknown: %x>\n", e_type);
+	}
 }
 
 /**
- *  * print_entry - print ELF's entry
- *   * @e_entry: e_entry address
- *    * @e_ident: pointer to char array
- *     */
+ * print_entry - print ELF's entry
+ * @e_entry: e_entry address
+ * @e_ident: pointer to char array
+ */
 void print_entry(unsigned int e_entry, unsigned char *e_ident)
 {
-		if (e_ident[EI_DATA] == ELFDATA2MSB)
-					e_entry = lit_to_big_endian(e_entry);
+	if (e_ident[EI_DATA] == ELFDATA2MSB)
+		e_entry = lit_to_big_endian(e_entry);
 
-			printf("  Entry point address:               ");
-				printf("%#x\n", (unsigned int)e_entry);
+	printf("  Entry point address:               ");
+	printf("%#x\n", (unsigned int)e_entry);
 }
 
 /**
- *  * lit_to_big_endian - converts little endian hexes to big hexes
- *   * @x: input uint
- *    * Return: output uint
- *     */
+ * lit_to_big_endian - converts little endian hexes to big hexes
+ * @x: input uint
+ * Return: output uint
+ */
 unsigned int lit_to_big_endian(unsigned int x)
 {
-		return (((x >> 24) & 0x000000ff) |
-						((x >> 8) & 0x0000ff00)  |
-								((x << 8) & 0x00ff0000)  |
-										((x << 24) & 0xff000000));
+	return (((x >> 24) & 0x000000ff) |
+		((x >> 8) & 0x0000ff00)  |
+		((x << 8) & 0x00ff0000)  |
+		((x << 24) & 0xff000000));
 }
